@@ -440,6 +440,20 @@
   /* ---------- fotos reales ---------- */
   .news .cover.photo{background-size:cover;background-position:center}
 
+  /* ---------- integración kidsbook ---------- */
+  .portal-note{font-size:.88rem;color:var(--ink-soft);margin-top:16px;text-align:center;max-width:46rem;margin-left:auto;margin-right:auto}
+  .kb-card{
+    background:#fff;color:var(--ink);border:2px solid var(--ink);border-radius:16px;
+    padding:24px 28px;margin-bottom:52px;display:flex;gap:20px;align-items:flex-start;
+    box-shadow:6px 6px 0 rgba(0,0,0,.3);
+  }
+  .kb-card .kb-ic{
+    flex:none;width:52px;height:52px;border-radius:16px;border:2px solid var(--ink);
+    background:var(--sun);display:flex;align-items:center;justify-content:center;font-size:1.5rem;
+  }
+  .kb-card h3{font-size:1.15rem}
+  @media (max-width:560px){.kb-card{flex-direction:column}}
+
   /* ---------- panel dirección ---------- */
   .kpis{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-bottom:14px}
   .kpi{border:1.5px solid #D9D6EA;border-radius:12px;background:#fff;padding:14px 16px}
@@ -507,7 +521,7 @@
       <a href="#admision">Admisión</a>
       <a href="#noticias">Noticias</a>
       <a href="#contacto">Contacto</a>
-      <a class="btn btn-portal" href="#tecnologia">Portal Apoderados</a>
+      <a class="btn btn-portal" href="https://apoderado.kidsbook.cl/login" target="_blank" rel="noopener">KidsBook · Apoderados</a>
     </nav>
   </div>
 </header>
@@ -610,8 +624,8 @@
         <p>Integramos las herramientas digitales que hoy marcan la pauta en educación inicial: comunicación oficial, gestión sin papeles y participación de las familias en tiempo real.</p>
       </div>
       <div class="tech-grid">
-        <div class="tech reveal"><div class="ic" style="background:var(--peach)">📔</div><h3>Agenda digital diaria<span class="new">Nuevo</span></h3><p>Alimentación, siesta, ánimo y fotos de cada actividad, directo al teléfono del apoderado. Adiós al cuaderno viajero.</p></div>
-        <div class="tech reveal"><div class="ic" style="background:var(--sky)">📣</div><h3>Canal oficial de comunicación</h3><p>Circulares, recordatorios y avisos con confirmación de lectura. Reemplaza los grupos de WhatsApp y sus mensajes perdidos.</p></div>
+        <div class="tech reveal"><div class="ic" style="background:var(--peach)">📔</div><h3>Agenda digital diaria<span class="new">KidsBook ✓</span></h3><p>La agenda KidsBook que apoderados y educadoras ya usan a diario, ahora con acceso directo desde la web del jardín, por perfil.</p></div>
+        <div class="tech reveal"><div class="ic" style="background:var(--sky)">📣</div><h3>Canal oficial de comunicación</h3><p>Circulares, recordatorios y avisos con confirmación de lectura — un solo canal que ordena lo que hoy se dispersa entre WhatsApp y correos.</p></div>
         <div class="tech reveal"><div class="ic" style="background:var(--lilac)">📝</div><h3>Postulación y matrícula online<span class="new">Nuevo</span></h3><p>Formulario en 3 pasos con seguimiento del estado y carga de documentos. Sin filas ni papeleo.</p></div>
         <div class="tech reveal"><div class="ic" style="background:var(--sky)">💳</div><h3>Pagos en línea</h3><p>Mensualidades con Webpay o transferencia, recordatorios automáticos y estado de cuenta por familia.</p></div>
         <div class="tech reveal"><div class="ic" style="background:var(--peach)">🤖</div><h3>Asistente virtual 24/7<span class="new">Nuevo</span></h3><p>Un asistente con IA responde al instante las preguntas frecuentes de admisión, incluso fuera de horario. Pruébalo abajo a la derecha.</p></div>
@@ -635,6 +649,7 @@
           </div>
         </div>
       </div>
+      <p class="portal-note reveal">La web integra el acceso a <b>KidsBook</b> — la herramienta que apoderados, educadoras y dirección ya usan a diario — y suma los módulos que KidsBook no cubre. Evolucionar a un portal propio queda siempre como decisión del jardín.</p>
     </div>
   </section>
 
@@ -749,13 +764,20 @@
           <tbody>
             <tr><td>Contacto</td><td>Formulario con error visible; consultas que se pierden</td><td>Formulario operativo + asistente IA 24/7 + WhatsApp Business API</td></tr>
             <tr><td>Admisión</td><td>Solo presencial, con papeleo</td><td>Postulación online en 3 pasos con seguimiento y carga de documentos</td></tr>
-            <tr><td>Comunicación</td><td>Plataforma externa (KidsBook) separada de la web</td><td>Portal de apoderados integrado: agenda diaria, circulares y autorizaciones</td></tr>
+            <tr><td>Comunicación</td><td>KidsBook funciona bien, pero vive separado de la web, la admisión y las noticias</td><td>KidsBook se mantiene e integra a la web, que suma lo que KidsBook no cubre</td></tr>
             <tr><td>Pagos</td><td>No disponibles en la web</td><td>Webpay / transferencia con recordatorios automáticos</td></tr>
             <tr><td>Contenido</td><td>Noticias detenidas hace años, foco en protocolos COVID</td><td>Blog autoadministrable desde el celular, con notificaciones a las familias</td></tr>
             <tr><td>Diseño</td><td>No adaptado a móviles, donde hoy navega la mayoría de los apoderados</td><td>Mobile-first, accesible (WCAG) y con carga rápida</td></tr>
             <tr><td>Visibilidad</td><td>Difícil de encontrar en Google</td><td>SEO local + Google Business: aparecer cuando buscan "jardín infantil Puente Alto"</td></tr>
           </tbody>
         </table>
+      </div>
+      <div class="kb-card reveal">
+        <div class="kb-ic" aria-hidden="true">🧩</div>
+        <div>
+          <h3 style="margin-bottom:6px">¿Y KidsBook? Se mantiene.</h3>
+          <p style="font-size:.92rem;color:var(--ink-soft)">Sabemos que apoderados, educadoras y dirección trabajan a diario con KidsBook — y eso no se toca. La nueva web lo integra desde el día uno con acceso directo por perfil, y suma lo que KidsBook no cubre: <b>postulación online, pagos, asistente con IA y aparecer en Google</b>. Nadie tiene que volver a aprender una herramienta: solo ganan las que faltaban.</p>
+        </div>
       </div>
       <div class="reveal" style="margin-bottom:52px">
         <h3 style="color:#fff;font-size:1.2rem;margin-bottom:16px">La otra mitad de la propuesta: el panel que verá dirección cada mañana</h3>
@@ -792,10 +814,10 @@
       <div class="fases">
         <div class="fase reveal"><span class="fn">1</span><h3 style="color:#fff">Nueva web + admisión online</h3><p>El sitio que estás viendo, con dominio y correos actuales.</p>
           <ul><li>Diseño mobile-first y SEO local</li><li>Postulación y agenda de visitas online</li><li>Blog autoadministrable</li></ul></div>
-        <div class="fase reveal"><span class="fn">2</span><h3 style="color:#fff">Portal de apoderados</h3><p>La agenda digital y el canal oficial de comunicación.</p>
-          <ul><li>Agenda diaria con fotos</li><li>Circulares con confirmación de lectura</li><li>Autorizaciones digitales y retiro con QR</li></ul></div>
+        <div class="fase reveal"><span class="fn">2</span><h3 style="color:#fff">Integración KidsBook + comunicación</h3><p>La web y la herramienta diaria del jardín, por fin conectadas.</p>
+          <ul><li>Acceso directo a KidsBook por perfil: apoderados, educadoras y dirección</li><li>Circulares y noticias con notificaciones</li><li>Autorizaciones digitales y retiro con QR</li></ul></div>
         <div class="fase reveal"><span class="fn">3</span><h3 style="color:#fff">Pagos + asistente IA</h3><p>Automatización de la gestión y la atención.</p>
-          <ul><li>Pagos en línea y estado de cuenta</li><li>Asistente IA entrenado con la info del jardín</li><li>Reportes de gestión para dirección</li></ul></div>
+          <ul><li>Pagos en línea y estado de cuenta</li><li>Asistente IA entrenado con la info del jardín</li><li>Portal propio unificado — opcional, solo si el jardín lo decide</li></ul></div>
       </div>
     </div>
   </section>
@@ -1009,6 +1031,7 @@
   }
   function answer(q){
     var s=q.toLowerCase();
+    if(/kidsbook|kid book|kidbook/.test(s))return '¡KidsBook se mantiene! 🧩 Es la herramienta diaria de apoderados, educadoras y dirección, y la nueva web integra su acceso directo: <a href="https://apoderado.kidsbook.cl/login" target="_blank" rel="noopener">apoderado.kidsbook.cl</a>. La web suma lo que KidsBook no cubre: postulación online, pagos e IA.';
     if(/nivel|edad|años|curso/.test(s))return 'Tenemos 4 niveles según la edad cumplida al 31 de marzo:<br>• <b>Medio Menor</b> — 2 años<br>• <b>Medio Mayor</b> — 3 años<br>• <b>Transición I</b> — 4 años<br>• <b>Transición II</b> — 5 años';
     if(/horario|jornada|hora/.test(s))return 'Tenemos dos jornadas: <b>mañana de 8:30 a 12:30</b> y <b>tarde de 14:00 a 18:00</b>, para todos los niveles. Además hay talleres complementarios. 🕘';
     if(/matr[ií]cula|documento|postul|inscri/.test(s))return 'Para matricular necesitas: certificado de nacimiento, fotocopia del carné de vacunas y 6 fotos tamaño carné. Puedes iniciar la <a href="#admision">postulación online aquí</a> en 3 pasos. 📝';
