@@ -1,0 +1,939 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="description" content="Propuesta de modernización web para el Jardín Infantil Pasito a Paso (Puente Alto): agenda digital, portal de apoderados, postulación online y asistente con IA.">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🐥</text></svg>">
+<title>Pasito a Paso · Propuesta de Modernización Web</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+  :root{
+    --ink:#33305E;
+    --ink-soft:#5B5880;
+    --paper:#FFFDF8;
+    --coral:#FF6247;
+    --coral-dark:#E04C33;
+    --teal:#1FA79B;
+    --teal-dark:#15877D;
+    --sun:#FFC845;
+    --sky:#EAF5F3;
+    --lilac:#F3EFFB;
+    --peach:#FFF1E8;
+    --line:#33305E;
+    --radius:18px;
+    --shadow:6px 6px 0 rgba(51,48,94,.14);
+    --font-display:'Trebuchet MS','Segoe UI',system-ui,sans-serif;
+    --font-body:'Segoe UI',system-ui,-apple-system,sans-serif;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  @media (prefers-reduced-motion: reduce){
+    html{scroll-behavior:auto}
+    *,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}
+  }
+  body{
+    font-family:var(--font-body);
+    color:var(--ink);
+    background:var(--paper);
+    line-height:1.6;
+    overflow-x:hidden;
+  }
+  h1,h2,h3,h4{font-family:var(--font-display);line-height:1.15;text-wrap:balance}
+  img{max-width:100%}
+  a{color:var(--teal-dark)}
+  :focus-visible{outline:3px solid var(--coral);outline-offset:3px;border-radius:4px}
+  .wrap{max-width:1120px;margin:0 auto;padding:0 24px}
+  .eyebrow{
+    display:inline-flex;align-items:center;gap:10px;
+    font-size:.78rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;
+    color:var(--teal-dark);margin-bottom:14px;
+  }
+  .eyebrow .steps-mini{display:inline-flex;align-items:flex-end;gap:2px}
+  .steps-mini i{display:block;width:6px;border-radius:2px}
+  .steps-mini i:nth-child(1){height:5px;background:var(--coral)}
+  .steps-mini i:nth-child(2){height:9px;background:var(--sun)}
+  .steps-mini i:nth-child(3){height:13px;background:var(--teal)}
+
+  /* ---------- demo ribbon ---------- */
+  .demo-pill{
+    position:fixed;left:16px;bottom:16px;z-index:90;
+    background:var(--ink);color:#fff;
+    font-size:.72rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;
+    padding:8px 14px;border-radius:999px;
+    display:flex;align-items:center;gap:8px;
+    box-shadow:0 6px 18px rgba(51,48,94,.35);
+  }
+  .demo-pill .dot{width:8px;height:8px;border-radius:50%;background:var(--sun);animation:pulse 2s infinite}
+  @keyframes pulse{0%,100%{opacity:1}50%{opacity:.35}}
+
+  /* ---------- nav ---------- */
+  header.nav{
+    position:sticky;top:0;z-index:80;
+    background:rgba(255,253,248,.92);
+    backdrop-filter:blur(8px);
+    border-bottom:2px solid var(--ink);
+  }
+  .nav-inner{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:14px 24px;max-width:1180px;margin:0 auto}
+  .logo{display:flex;align-items:center;gap:11px;text-decoration:none;color:var(--ink)}
+  .logo .steps{display:flex;align-items:flex-end;gap:3px}
+  .logo .steps i{display:block;width:10px;border-radius:3px;border:2px solid var(--ink)}
+  .logo .steps i:nth-child(1){height:12px;background:var(--coral)}
+  .logo .steps i:nth-child(2){height:19px;background:var(--sun)}
+  .logo .steps i:nth-child(3){height:26px;background:var(--teal)}
+  .logo b{font-family:var(--font-display);font-size:1.18rem;letter-spacing:-.01em}
+  .logo small{display:block;font-size:.68rem;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-soft)}
+  nav.links{display:flex;align-items:center;gap:4px}
+  nav.links a{
+    text-decoration:none;color:var(--ink);font-weight:600;font-size:.92rem;
+    padding:8px 12px;border-radius:10px;transition:background .15s;
+  }
+  nav.links a:hover{background:var(--sky)}
+  .btn{
+    display:inline-block;text-decoration:none;cursor:pointer;
+    font-family:var(--font-display);font-weight:700;font-size:.95rem;
+    padding:12px 22px;border-radius:14px;border:2px solid var(--ink);
+    transition:transform .12s, box-shadow .12s;
+  }
+  .btn:active{transform:translate(2px,2px);box-shadow:none}
+  .btn-coral{background:var(--coral);color:#fff;box-shadow:4px 4px 0 var(--ink)}
+  .btn-coral:hover{background:var(--coral-dark)}
+  .btn-ghost{background:#fff;color:var(--ink);box-shadow:4px 4px 0 var(--ink)}
+  .btn-ghost:hover{background:var(--sky)}
+  .btn-portal{background:var(--ink);color:#fff;font-size:.85rem;padding:9px 16px;box-shadow:3px 3px 0 rgba(51,48,94,.25)}
+  .hamburger{display:none;background:none;border:2px solid var(--ink);border-radius:10px;padding:8px 10px;cursor:pointer;font-size:1rem;color:var(--ink)}
+
+  /* ---------- hero ---------- */
+  .hero{background:var(--peach);position:relative;overflow:hidden}
+  .hero-inner{
+    display:grid;grid-template-columns:1.15fr .85fr;gap:48px;align-items:center;
+    padding:72px 24px 96px;max-width:1120px;margin:0 auto;position:relative;
+  }
+  .hero h1{font-size:clamp(2.2rem,5vw,3.6rem);letter-spacing:-.02em;margin-bottom:20px}
+  .hero h1 .hl{position:relative;display:inline-block;color:var(--coral)}
+  .hero h1 .hl svg{position:absolute;left:0;bottom:-10px;width:100%;height:12px}
+  .hero p.lead{font-size:1.14rem;color:var(--ink-soft);max-width:34rem;margin-bottom:30px}
+  .hero-ctas{display:flex;flex-wrap:wrap;gap:14px;margin-bottom:36px}
+  .hero-facts{display:flex;flex-wrap:wrap;gap:26px}
+  .fact b{display:block;font-family:var(--font-display);font-size:1.5rem;color:var(--ink)}
+  .fact span{font-size:.82rem;color:var(--ink-soft);font-weight:600}
+  .blob{position:absolute;border-radius:50%;opacity:.5;pointer-events:none}
+  .blob.b1{width:340px;height:340px;background:var(--sun);top:-140px;right:-80px;border-radius:47% 53% 61% 39%/44% 51% 49% 56%}
+  .blob.b2{width:220px;height:220px;background:var(--teal);bottom:-120px;left:-60px;opacity:.18;border-radius:57% 43% 41% 59%/54% 41% 59% 46%}
+
+  /* phone mockup */
+  .phone{
+    width:300px;justify-self:center;position:relative;z-index:2;
+    background:var(--ink);border-radius:34px;padding:12px;
+    box-shadow:14px 14px 0 rgba(51,48,94,.15);
+    transform:rotate(2.5deg);
+  }
+  .phone .screen{background:#fff;border-radius:24px;overflow:hidden}
+  .phone .p-head{background:var(--teal);color:#fff;padding:14px 16px 12px}
+  .phone .p-head b{font-family:var(--font-display);font-size:.95rem}
+  .phone .p-head span{display:block;font-size:.68rem;opacity:.85}
+  .p-feed{padding:12px;display:flex;flex-direction:column;gap:10px;min-height:330px;background:linear-gradient(#F6FBFA,#FFF)}
+  .p-card{
+    border:1.5px solid #E3E1F0;border-radius:12px;padding:9px 11px;
+    font-size:.74rem;line-height:1.45;background:#fff;
+    opacity:0;transform:translateY(8px);
+    animation:feedin .45s forwards;
+  }
+  @keyframes feedin{to{opacity:1;transform:none}}
+  .p-card time{display:block;font-size:.62rem;font-weight:700;color:var(--teal-dark);letter-spacing:.06em}
+  .p-card.pc-photo .ph{
+    height:64px;border-radius:8px;margin-top:6px;
+    background:
+      radial-gradient(circle at 25% 60%, var(--sun) 0 14%, transparent 15%),
+      radial-gradient(circle at 55% 35%, var(--coral) 0 12%, transparent 13%),
+      radial-gradient(circle at 80% 65%, var(--teal) 0 13%, transparent 14%),
+      #FDF3E3;
+  }
+  .p-card .tag{display:inline-block;font-size:.6rem;font-weight:700;padding:2px 8px;border-radius:999px;margin-top:5px}
+  .tag-ok{background:#E1F5EF;color:#0E7A62}
+  .tag-info{background:#FFF3D6;color:#8A6A12}
+  .p-notif{
+    position:absolute;top:86px;left:-70px;background:#fff;border:2px solid var(--ink);
+    border-radius:12px;padding:9px 13px;font-size:.7rem;font-weight:600;max-width:180px;
+    box-shadow:5px 5px 0 rgba(51,48,94,.15);transform:rotate(-4deg);
+    animation:feedin .5s 2.6s backwards;
+  }
+  .p-notif b{color:var(--coral)}
+
+  /* ---------- section scaffolding ---------- */
+  section{padding:84px 0}
+  .sec-head{max-width:640px;margin-bottom:48px}
+  .sec-head h2{font-size:clamp(1.7rem,3.4vw,2.4rem);letter-spacing:-.015em;margin-bottom:12px}
+  .sec-head p{color:var(--ink-soft);font-size:1.04rem}
+  .divider{display:block;width:100%;height:52px;margin-bottom:-1px}
+  .reveal{opacity:0;transform:translateY(22px);transition:opacity .6s ease,transform .6s ease}
+  .reveal.in{opacity:1;transform:none}
+
+  /* ---------- sellos ---------- */
+  .sellos{display:grid;grid-template-columns:repeat(5,1fr);gap:16px}
+  .sello{
+    background:#fff;border:2px solid var(--ink);border-radius:var(--radius);
+    padding:22px 16px;text-align:center;box-shadow:var(--shadow);
+    transition:transform .15s;
+  }
+  .sello:hover{transform:translateY(-4px) rotate(-.6deg)}
+  .sello .ic{
+    width:52px;height:52px;margin:0 auto 12px;border-radius:16px;border:2px solid var(--ink);
+    display:flex;align-items:center;justify-content:center;font-size:1.4rem;
+  }
+  .sello h3{font-size:1rem;margin-bottom:6px}
+  .sello p{font-size:.8rem;color:var(--ink-soft);line-height:1.45}
+
+  /* ---------- niveles ---------- */
+  #niveles{background:var(--sky)}
+  .niveles-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:18px}
+  .nivel{
+    background:#fff;border:2px solid var(--ink);border-radius:var(--radius);
+    overflow:hidden;box-shadow:var(--shadow);display:flex;flex-direction:column;
+  }
+  .nivel .band{padding:16px 18px 12px;color:#fff}
+  .nivel .band .edad{font-size:.7rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;opacity:.9}
+  .nivel .band h3{font-size:1.22rem;margin-top:2px}
+  .nivel .body{padding:16px 18px 20px;font-size:.86rem;color:var(--ink-soft);flex:1;display:flex;flex-direction:column;gap:10px}
+  .nivel .body ul{list-style:none;display:flex;flex-direction:column;gap:7px}
+  .nivel .body li{padding-left:20px;position:relative}
+  .nivel .body li::before{
+    content:"";position:absolute;left:0;top:.42em;width:9px;height:9px;border-radius:3px;border:1.5px solid var(--ink);
+  }
+  .nivel:nth-child(1) .band{background:var(--coral)}
+  .nivel:nth-child(2) .band{background:var(--sun);color:var(--ink)}
+  .nivel:nth-child(3) .band{background:var(--teal)}
+  .nivel:nth-child(4) .band{background:var(--ink)}
+  .nivel:nth-child(1) li::before{background:var(--coral)}
+  .nivel:nth-child(2) li::before{background:var(--sun)}
+  .nivel:nth-child(3) li::before{background:var(--teal)}
+  .nivel:nth-child(4) li::before{background:var(--ink)}
+  .jornadas{
+    margin-top:26px;background:#fff;border:2px dashed var(--ink);border-radius:var(--radius);
+    padding:18px 24px;display:flex;flex-wrap:wrap;gap:12px 40px;align-items:center;font-size:.95rem;
+  }
+  .jornadas b{font-family:var(--font-display)}
+
+  /* ---------- tecnología ---------- */
+  .tech-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-bottom:52px}
+  .tech{
+    background:#fff;border:2px solid var(--ink);border-radius:var(--radius);
+    padding:24px;box-shadow:var(--shadow);
+  }
+  .tech .ic{
+    width:46px;height:46px;border-radius:14px;border:2px solid var(--ink);
+    display:flex;align-items:center;justify-content:center;font-size:1.25rem;margin-bottom:14px;
+  }
+  .tech h3{font-size:1.05rem;margin-bottom:8px}
+  .tech p{font-size:.87rem;color:var(--ink-soft)}
+  .tech .new{
+    display:inline-block;font-size:.62rem;font-weight:800;letter-spacing:.1em;text-transform:uppercase;
+    background:var(--sun);border:1.5px solid var(--ink);border-radius:999px;padding:2px 9px;margin-left:8px;vertical-align:middle;
+  }
+
+  /* portal mockup */
+  .portal{
+    border:2px solid var(--ink);border-radius:20px;overflow:hidden;background:#fff;
+    box-shadow:12px 12px 0 rgba(51,48,94,.13);
+  }
+  .portal .bar{display:flex;align-items:center;gap:8px;background:var(--ink);padding:11px 16px}
+  .portal .bar i{width:11px;height:11px;border-radius:50%}
+  .portal .bar i:nth-child(1){background:var(--coral)}
+  .portal .bar i:nth-child(2){background:var(--sun)}
+  .portal .bar i:nth-child(3){background:var(--teal)}
+  .portal .bar span{color:#B9B6D6;font-size:.75rem;margin-left:10px;font-weight:600}
+  .portal .tabs{display:flex;gap:2px;background:#EFEDF7;padding:10px 14px 0;overflow-x:auto}
+  .portal .tabs button{
+    border:2px solid var(--ink);border-bottom:none;border-radius:10px 10px 0 0;
+    background:#fff;padding:9px 18px;font-family:var(--font-display);font-weight:700;font-size:.82rem;
+    color:var(--ink-soft);cursor:pointer;white-space:nowrap;
+  }
+  .portal .tabs button[aria-selected="true"]{background:var(--paper);color:var(--ink);position:relative;top:1px}
+  .portal .pane{padding:26px;background:var(--paper);min-height:230px}
+  .pane-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+  .mini-card{border:1.5px solid #D9D6EA;border-radius:12px;background:#fff;padding:14px 16px;font-size:.85rem}
+  .mini-card b{display:block;font-size:.92rem;margin-bottom:3px}
+  .mini-card .st{float:right;font-size:.65rem;font-weight:800;padding:3px 9px;border-radius:999px}
+  .st-ok{background:#E1F5EF;color:#0E7A62}
+  .st-pend{background:#FFE7E1;color:#B5432E}
+  .st-new{background:#FFF3D6;color:#8A6A12}
+  .mini-card small{color:var(--ink-soft)}
+
+  /* ---------- admisión ---------- */
+  #admision{background:var(--lilac)}
+  .adm-layout{display:grid;grid-template-columns:.9fr 1.1fr;gap:44px;align-items:start}
+  .doc-list{list-style:none;display:flex;flex-direction:column;gap:12px;margin-top:18px}
+  .doc-list li{
+    background:#fff;border:2px solid var(--ink);border-radius:12px;padding:12px 16px;
+    font-size:.9rem;display:flex;gap:12px;align-items:center;box-shadow:3px 3px 0 rgba(51,48,94,.12);
+  }
+  .doc-list li .n{
+    flex:none;width:28px;height:28px;border-radius:9px;border:2px solid var(--ink);
+    display:flex;align-items:center;justify-content:center;font-weight:800;font-size:.8rem;background:var(--sun);
+  }
+  .wizard{
+    background:#fff;border:2px solid var(--ink);border-radius:20px;overflow:hidden;
+    box-shadow:10px 10px 0 rgba(51,48,94,.13);
+  }
+  .wiz-head{background:var(--ink);color:#fff;padding:16px 24px}
+  .wiz-head b{font-family:var(--font-display)}
+  .wiz-head span{display:block;font-size:.74rem;opacity:.8}
+  .wiz-steps{display:flex;gap:6px;padding:16px 24px 0}
+  .wiz-steps i{height:7px;flex:1;border-radius:99px;background:#E6E4F2;transition:background .3s}
+  .wiz-steps i.done{background:var(--teal)}
+  .wiz-body{padding:20px 24px 26px}
+  .wiz-body label{display:block;font-size:.8rem;font-weight:700;margin:14px 0 5px}
+  .wiz-body input,.wiz-body select{
+    width:100%;padding:11px 13px;border:2px solid var(--ink);border-radius:11px;
+    font-family:var(--font-body);font-size:.92rem;background:#fff;color:var(--ink);
+  }
+  .wiz-actions{display:flex;justify-content:space-between;gap:12px;margin-top:22px}
+  .wiz-ok{text-align:center;padding:14px 0 6px}
+  .wiz-ok .check{
+    width:64px;height:64px;margin:0 auto 14px;border-radius:50%;background:var(--teal);
+    border:2px solid var(--ink);display:flex;align-items:center;justify-content:center;
+    color:#fff;font-size:1.7rem;font-weight:800;
+  }
+  .wiz-ok code{background:var(--lilac);border-radius:8px;padding:3px 10px;font-size:.95rem}
+  .wiz-note{font-size:.72rem;color:var(--ink-soft);margin-top:14px;text-align:center}
+
+  /* ---------- noticias ---------- */
+  .news-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+  .news{
+    background:#fff;border:2px solid var(--ink);border-radius:var(--radius);overflow:hidden;
+    box-shadow:var(--shadow);
+  }
+  .news .cover{height:120px;display:flex;align-items:center;justify-content:center;font-size:2.2rem;border-bottom:2px solid var(--ink)}
+  .news:nth-child(1) .cover{background:var(--sun)}
+  .news:nth-child(2) .cover{background:var(--sky)}
+  .news:nth-child(3) .cover{background:var(--peach)}
+  .news .body{padding:18px 20px 22px}
+  .news .body time{font-size:.7rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--teal-dark)}
+  .news h3{font-size:1.02rem;margin:6px 0 8px}
+  .news p{font-size:.85rem;color:var(--ink-soft)}
+
+  /* ---------- contacto ---------- */
+  #contacto{background:var(--sky)}
+  .contact-layout{display:grid;grid-template-columns:1fr 1fr;gap:40px;align-items:start}
+  .c-info{display:flex;flex-direction:column;gap:16px}
+  .c-item{
+    background:#fff;border:2px solid var(--ink);border-radius:14px;padding:16px 20px;
+    display:flex;gap:14px;align-items:flex-start;box-shadow:4px 4px 0 rgba(51,48,94,.12);font-size:.93rem;
+  }
+  .c-item .ic{flex:none;width:40px;height:40px;border-radius:12px;border:2px solid var(--ink);display:flex;align-items:center;justify-content:center;font-size:1.1rem}
+  .c-item b{display:block;font-family:var(--font-display);font-size:.95rem}
+  .c-map{
+    margin-top:6px;border:2px solid var(--ink);border-radius:14px;height:150px;position:relative;overflow:hidden;
+    background:
+      linear-gradient(90deg,transparent 48%, #CFE4DF 48% 52%, transparent 52%),
+      linear-gradient(0deg,transparent 30%, #CFE4DF 30% 34%, transparent 34%),
+      linear-gradient(35deg,transparent 60%, #F3E3C8 60% 68%, transparent 68%),
+      #E3F0EC;
+  }
+  .c-map .pin{
+    position:absolute;left:50%;top:38%;transform:translate(-50%,-100%);
+    width:26px;height:26px;background:var(--coral);border:2px solid var(--ink);
+    border-radius:50% 50% 50% 0;rotate:-45deg;
+  }
+  .c-map .pin::after{content:"";position:absolute;inset:7px;background:#fff;border-radius:50%}
+  .c-map a{
+    position:absolute;right:10px;bottom:10px;background:#fff;border:2px solid var(--ink);border-radius:9px;
+    font-size:.72rem;font-weight:700;padding:5px 10px;text-decoration:none;color:var(--ink);
+  }
+  form.c-form{
+    background:#fff;border:2px solid var(--ink);border-radius:20px;padding:28px;
+    box-shadow:10px 10px 0 rgba(51,48,94,.13);
+  }
+  .c-form h3{margin-bottom:4px}
+  .c-form>p{font-size:.85rem;color:var(--ink-soft);margin-bottom:10px}
+  .c-form label{display:block;font-size:.8rem;font-weight:700;margin:14px 0 5px}
+  .c-form input,.c-form select,.c-form textarea{
+    width:100%;padding:11px 13px;border:2px solid var(--ink);border-radius:11px;
+    font-family:var(--font-body);font-size:.92rem;background:#fff;color:var(--ink);resize:vertical;
+  }
+  .c-form .sent{display:none;margin-top:14px;background:#E1F5EF;border:2px solid var(--teal);border-radius:11px;padding:12px 16px;font-size:.88rem;font-weight:600;color:#0E7A62}
+
+  /* ---------- pitch ---------- */
+  #pitch{background:var(--ink);color:#fff}
+  #pitch .eyebrow{color:var(--sun)}
+  #pitch .sec-head p{color:#C9C6E2}
+  .compare{width:100%;border-collapse:separate;border-spacing:0;font-size:.92rem;background:#fff;color:var(--ink);border:2px solid var(--ink);border-radius:16px;overflow:hidden}
+  .compare th,.compare td{padding:14px 18px;text-align:left;vertical-align:top}
+  .compare thead th{font-family:var(--font-display);font-size:.95rem;background:var(--sun);border-bottom:2px solid var(--ink)}
+  .compare thead th:first-child{background:#EFEDF7}
+  .compare thead th:last-child{background:var(--teal);color:#fff}
+  .compare tbody tr:not(:last-child) td{border-bottom:1.5px solid #E6E4F2}
+  .compare td:first-child{font-weight:700;width:26%}
+  .compare td:nth-child(2){color:#8A5B4F;width:34%}
+  .compare td:last-child{color:#0E7A62;font-weight:600}
+  .compare-scroll{overflow-x:auto;border-radius:16px;margin-bottom:52px}
+  .fases{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+  .fase{background:rgba(255,255,255,.06);border:1.5px solid rgba(255,255,255,.22);border-radius:16px;padding:24px}
+  .fase .fn{
+    display:inline-flex;align-items:center;justify-content:center;width:38px;height:38px;
+    border-radius:12px;font-family:var(--font-display);font-weight:800;margin-bottom:12px;color:var(--ink);
+  }
+  .fase:nth-child(1) .fn{background:var(--coral);color:#fff}
+  .fase:nth-child(2) .fn{background:var(--sun)}
+  .fase:nth-child(3) .fn{background:var(--teal);color:#fff}
+  .fase h3{font-size:1.05rem;margin-bottom:8px}
+  .fase p{font-size:.85rem;color:#C9C6E2}
+  .fase ul{margin-top:10px;padding-left:18px;font-size:.83rem;color:#DEDCF0;display:flex;flex-direction:column;gap:5px}
+
+  /* ---------- footer ---------- */
+  footer{background:var(--ink);color:#B9B6D6;border-top:1.5px solid rgba(255,255,255,.15);padding:36px 0 90px}
+  .foot{display:flex;flex-wrap:wrap;gap:24px;justify-content:space-between;align-items:center}
+  .foot .logo b{color:#fff}
+  .foot .logo small{color:#B9B6D6}
+  .foot p{font-size:.8rem}
+
+  /* ---------- chatbot ---------- */
+  .bot-fab{
+    position:fixed;right:18px;bottom:18px;z-index:95;
+    width:62px;height:62px;border-radius:50%;border:2px solid var(--ink);
+    background:var(--coral);color:#fff;font-size:1.6rem;cursor:pointer;
+    box-shadow:5px 5px 0 rgba(51,48,94,.3);
+    display:flex;align-items:center;justify-content:center;
+    transition:transform .15s;
+  }
+  .bot-fab:hover{transform:scale(1.06)}
+  .bot-fab .badge{
+    position:absolute;top:-4px;right:-4px;background:var(--sun);color:var(--ink);
+    border:2px solid var(--ink);border-radius:999px;font-size:.6rem;font-weight:800;padding:1px 7px;
+  }
+  .bot-panel{
+    position:fixed;right:18px;bottom:92px;z-index:95;width:min(340px,calc(100vw - 36px));
+    background:#fff;border:2px solid var(--ink);border-radius:18px;overflow:hidden;
+    box-shadow:10px 10px 0 rgba(51,48,94,.25);
+    display:none;flex-direction:column;
+  }
+  .bot-panel.open{display:flex}
+  .bot-head{background:var(--teal);color:#fff;padding:14px 18px;display:flex;align-items:center;gap:11px}
+  .bot-head .av{width:36px;height:36px;border-radius:50%;background:#fff;display:flex;align-items:center;justify-content:center;font-size:1.15rem;border:2px solid var(--ink)}
+  .bot-head b{font-family:var(--font-display);font-size:.95rem;display:block;line-height:1.2}
+  .bot-head span{font-size:.68rem;opacity:.9}
+  .bot-log{padding:14px;display:flex;flex-direction:column;gap:9px;height:290px;overflow-y:auto;background:#F8FBFA}
+  .msg{max-width:85%;padding:9px 13px;border-radius:14px;font-size:.82rem;line-height:1.45}
+  .msg.bot{background:#fff;border:1.5px solid #DDE8E5;border-bottom-left-radius:4px;align-self:flex-start}
+  .msg.me{background:var(--ink);color:#fff;border-bottom-right-radius:4px;align-self:flex-end}
+  .chips{display:flex;flex-wrap:wrap;gap:6px;padding:0 14px 10px;background:#F8FBFA}
+  .chips button{
+    border:1.5px solid var(--teal);color:var(--teal-dark);background:#fff;border-radius:999px;
+    font-size:.72rem;font-weight:700;padding:5px 11px;cursor:pointer;
+  }
+  .chips button:hover{background:var(--sky)}
+  .bot-in{display:flex;border-top:2px solid var(--ink)}
+  .bot-in input{flex:1;border:none;padding:12px 14px;font-size:.85rem;font-family:var(--font-body);color:var(--ink)}
+  .bot-in input:focus-visible{outline-offset:-3px}
+  .bot-in button{border:none;background:var(--coral);color:#fff;font-weight:800;padding:0 18px;cursor:pointer;font-size:1.05rem}
+  .bot-note{font-size:.62rem;color:var(--ink-soft);text-align:center;padding:5px 10px;background:#F8FBFA}
+
+  /* ---------- responsive ---------- */
+  @media (max-width:980px){
+    .hero-inner{grid-template-columns:1fr;padding:56px 24px 72px}
+    .phone{margin-top:10px}
+    .p-notif{left:auto;right:-8px;top:-18px}
+    .sellos{grid-template-columns:repeat(2,1fr)}
+    .sellos .sello:last-child{grid-column:1/-1}
+    .niveles-grid{grid-template-columns:repeat(2,1fr)}
+    .tech-grid{grid-template-columns:repeat(2,1fr)}
+    .adm-layout,.contact-layout{grid-template-columns:1fr}
+    .news-grid{grid-template-columns:1fr}
+    .fases{grid-template-columns:1fr}
+    .pane-grid{grid-template-columns:1fr}
+    nav.links{
+      display:none;position:absolute;top:100%;left:0;right:0;flex-direction:column;align-items:stretch;
+      background:var(--paper);border-bottom:2px solid var(--ink);padding:12px 20px 18px;gap:2px;
+    }
+    nav.links.open{display:flex}
+    nav.links a{padding:11px 12px}
+    .hamburger{display:block}
+  }
+  @media (max-width:560px){
+    .niveles-grid,.tech-grid{grid-template-columns:1fr}
+    .sellos{grid-template-columns:1fr}
+    section{padding:64px 0}
+  }
+</style>
+
+<div class="demo-pill" role="note" aria-label="Esta página es una maqueta de demostración">
+  <span class="dot"></span> Demo · Propuesta de modernización
+</div>
+
+<header class="nav">
+  <div class="nav-inner">
+    <a class="logo" href="#inicio" aria-label="Pasito a Paso, inicio">
+      <span class="steps" aria-hidden="true"><i></i><i></i><i></i></span>
+      <span><b>Pasito a Paso</b><small>Jardín Infantil · Puente Alto</small></span>
+    </a>
+    <button class="hamburger" id="hamb" aria-label="Abrir menú" aria-expanded="false">☰</button>
+    <nav class="links" id="menu" aria-label="Navegación principal">
+      <a href="#jardin">Nuestro Jardín</a>
+      <a href="#niveles">Niveles</a>
+      <a href="#tecnologia">Tecnología</a>
+      <a href="#admision">Admisión</a>
+      <a href="#noticias">Noticias</a>
+      <a href="#contacto">Contacto</a>
+      <a class="btn btn-portal" href="#tecnologia">Portal Apoderados</a>
+    </nav>
+  </div>
+</header>
+
+<main id="inicio">
+
+  <!-- ============ HERO ============ -->
+  <div class="hero">
+    <div class="blob b1" aria-hidden="true"></div>
+    <div class="blob b2" aria-hidden="true"></div>
+    <div class="hero-inner">
+      <div>
+        <span class="eyebrow"><span class="steps-mini" aria-hidden="true"><i></i><i></i><i></i></span> Medio Menor a Transición II · Ciudad del Este, Puente Alto</span>
+        <h1>Cada gran futuro empieza
+          <span class="hl">pasito a paso
+            <svg viewBox="0 0 200 12" preserveAspectRatio="none" aria-hidden="true"><path d="M2 8 Q 25 2 50 7 T 100 7 T 150 7 T 198 6" fill="none" stroke="#FFC845" stroke-width="5" stroke-linecap="round"/></svg>
+          </span>
+        </h1>
+        <p class="lead">Un jardín infantil donde tu hijo crece autónomo, sociable y feliz — y donde tú lo acompañas en tiempo real, desde tu teléfono, con la tranquilidad de saber cómo fue su día.</p>
+        <div class="hero-ctas">
+          <a class="btn btn-coral" href="#admision">Postula online en 3 pasos</a>
+          <a class="btn btn-ghost" href="#jardin">Agenda una visita</a>
+        </div>
+        <div class="hero-facts" role="list">
+          <div class="fact" role="listitem"><b>4</b><span>niveles · 2 a 5 años</span></div>
+          <div class="fact" role="listitem"><b>2</b><span>jornadas: mañana y tarde</span></div>
+          <div class="fact" role="listitem"><b>100%</b><span>comunicación digital con tu familia</span></div>
+        </div>
+      </div>
+
+      <div class="phone" aria-label="Simulación de la agenda digital para apoderados">
+        <div class="p-notif" aria-hidden="true">📲 <b>Nueva foto</b> del día de Amanda en el taller de arte</div>
+        <div class="screen">
+          <div class="p-head"><b>Agenda de Amanda</b><span>Medio Mayor · Jornada mañana · Hoy</span></div>
+          <div class="p-feed" id="feed" aria-live="polite"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <svg class="divider" viewBox="0 0 1440 52" preserveAspectRatio="none" aria-hidden="true"><path d="M0,26 C240,52 480,0 720,26 C960,52 1200,0 1440,26 L1440,52 L0,52 Z" fill="#FFFDF8"/><rect y="50" width="1440" height="2" fill="#FFFDF8"/><path d="M0,26 C240,52 480,0 720,26 C960,52 1200,0 1440,26" fill="none" stroke="#FFF1E8" stroke-width="0"/></svg>
+
+  <!-- ============ SELLOS ============ -->
+  <section id="jardin">
+    <div class="wrap">
+      <div class="sec-head reveal">
+        <span class="eyebrow"><span class="steps-mini" aria-hidden="true"><i></i><i></i><i></i></span> Nuestro proyecto educativo</span>
+        <h2>Cinco sellos que caminan con cada niño</h2>
+        <p>Nuestro proyecto forma personas íntegras desde la primera infancia, en un espacio seguro, climatizado y diseñado bajo todas las normas de confort y seguridad.</p>
+      </div>
+      <div class="sellos">
+        <div class="sello reveal"><div class="ic" style="background:var(--peach)">🧭</div><h3>Autónomos</h3><p>Valerse por sí mismos en sus actos, pensamientos y emociones.</p></div>
+        <div class="sello reveal"><div class="ic" style="background:var(--lilac)">💛</div><h3>Se valoran</h3><p>Conocen su capacidad de pensar, crear e innovar.</p></div>
+        <div class="sello reveal"><div class="ic" style="background:var(--sky)">🤝</div><h3>Sociables</h3><p>Disfrutan la vida en comunidad y las relaciones con otros.</p></div>
+        <div class="sello reveal"><div class="ic" style="background:var(--peach)">🚀</div><h3>Activos</h3><p>Resuelven problemas con espíritu emprendedor.</p></div>
+        <div class="sello reveal"><div class="ic" style="background:var(--sky)">😄</div><h3>Felices</h3><p>Aprenden jugando y disfrutan cada etapa de su infancia.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ NIVELES ============ -->
+  <section id="niveles">
+    <div class="wrap">
+      <div class="sec-head reveal">
+        <span class="eyebrow"><span class="steps-mini" aria-hidden="true"><i></i><i></i><i></i></span> Niveles 2026</span>
+        <h2>Un escalón para cada edad</h2>
+        <p>Las edades se consideran cumplidas al 31 de marzo. Todos los niveles cuentan con salas equipadas con tecnología y climatización completa.</p>
+      </div>
+      <div class="niveles-grid">
+        <article class="nivel reveal">
+          <div class="band"><span class="edad">2 años</span><h3>Medio Menor</h3></div>
+          <div class="body"><ul><li>Adaptación y primer vínculo</li><li>Lenguaje y motricidad</li><li>Hábitos y autonomía inicial</li></ul></div>
+        </article>
+        <article class="nivel reveal">
+          <div class="band"><span class="edad">3 años</span><h3>Medio Mayor</h3></div>
+          <div class="body"><ul><li>Juego colaborativo</li><li>Expresión artística y talleres</li><li>Exploración del entorno</li></ul></div>
+        </article>
+        <article class="nivel reveal">
+          <div class="band"><span class="edad">4 años</span><h3>Transición I</h3></div>
+          <div class="body"><ul><li>Pre-lectura y pre-cálculo</li><li>Pensamiento lógico con juego</li><li>Trabajo en equipo</li></ul></div>
+        </article>
+        <article class="nivel reveal">
+          <div class="band"><span class="edad">5 años</span><h3>Transición II</h3></div>
+          <div class="body"><ul><li>Preparación para 1° básico</li><li>Autonomía y responsabilidad</li><li>Proyectos y presentaciones</li></ul></div>
+        </article>
+      </div>
+      <div class="jornadas reveal">
+        <span>🕘 <b>Jornada mañana:</b> 8:30 a 12:30 h</span>
+        <span>🕑 <b>Jornada tarde:</b> 14:00 a 18:00 h</span>
+        <span>🎨 <b>Talleres complementarios</b> durante todo el año</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ TECNOLOGÍA ============ -->
+  <section id="tecnologia">
+    <div class="wrap">
+      <div class="sec-head reveal">
+        <span class="eyebrow"><span class="steps-mini" aria-hidden="true"><i></i><i></i><i></i></span> Jardín conectado</span>
+        <h2>La tranquilidad de ver su día, en tiempo real</h2>
+        <p>Integramos las herramientas digitales que hoy marcan la pauta en educación inicial: comunicación oficial, gestión sin papeles y participación de las familias en tiempo real.</p>
+      </div>
+      <div class="tech-grid">
+        <div class="tech reveal"><div class="ic" style="background:var(--peach)">📔</div><h3>Agenda digital diaria<span class="new">Nuevo</span></h3><p>Alimentación, siesta, ánimo y fotos de cada actividad, directo al teléfono del apoderado. Adiós al cuaderno viajero.</p></div>
+        <div class="tech reveal"><div class="ic" style="background:var(--sky)">📣</div><h3>Canal oficial de comunicación</h3><p>Circulares, recordatorios y avisos con confirmación de lectura. Reemplaza los grupos de WhatsApp y sus mensajes perdidos.</p></div>
+        <div class="tech reveal"><div class="ic" style="background:var(--lilac)">📝</div><h3>Postulación y matrícula online<span class="new">Nuevo</span></h3><p>Formulario en 3 pasos con seguimiento del estado y carga de documentos. Sin filas ni papeleo.</p></div>
+        <div class="tech reveal"><div class="ic" style="background:var(--sky)">💳</div><h3>Pagos en línea</h3><p>Mensualidades con Webpay o transferencia, recordatorios automáticos y estado de cuenta por familia.</p></div>
+        <div class="tech reveal"><div class="ic" style="background:var(--peach)">🤖</div><h3>Asistente virtual 24/7<span class="new">Nuevo</span></h3><p>Un asistente con IA responde al instante las preguntas frecuentes de admisión, incluso fuera de horario. Pruébalo abajo a la derecha.</p></div>
+        <div class="tech reveal"><div class="ic" style="background:var(--lilac)">🛡️</div><h3>Retiro seguro con QR</h3><p>Autorizaciones digitales con registro de quién retira a cada niño, más protocolos y reglamentos siempre disponibles.</p></div>
+      </div>
+
+      <div class="portal reveal" aria-label="Simulación del portal de apoderados">
+        <div class="bar" aria-hidden="true"><i></i><i></i><i></i><span>portal.pasitoapaso.cl — Portal Apoderados</span></div>
+        <div class="tabs" role="tablist" aria-label="Secciones del portal">
+          <button role="tab" aria-selected="true" data-pane="agenda">📔 Agenda</button>
+          <button role="tab" aria-selected="false" data-pane="circulares">📣 Circulares</button>
+          <button role="tab" aria-selected="false" data-pane="pagos">💳 Pagos</button>
+          <button role="tab" aria-selected="false" data-pane="autorizaciones">🛡️ Autorizaciones</button>
+        </div>
+        <div class="pane" id="pane">
+          <div class="pane-grid" data-content="agenda">
+            <div class="mini-card"><span class="st st-ok">Registrado</span><b>Ingreso 8:31 h</b><small>Amanda ingresó con su apoderado. Registro QR en portería.</small></div>
+            <div class="mini-card"><span class="st st-ok">Completo</span><b>Colación de la mañana</b><small>Comió todo · fruta y yogurt. Sin observaciones.</small></div>
+            <div class="mini-card"><span class="st st-new">3 fotos</span><b>Taller de arte 🎨</b><small>Pintura con témpera: mezcla de colores primarios.</small></div>
+            <div class="mini-card"><span class="st st-ok">45 min</span><b>Siesta</b><small>Descansó tranquila entre 13:00 y 13:45.</small></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ ADMISIÓN ============ -->
+  <section id="admision">
+    <div class="wrap">
+      <div class="sec-head reveal">
+        <span class="eyebrow"><span class="steps-mini" aria-hidden="true"><i></i><i></i><i></i></span> Admisión 2026 – 2027</span>
+        <h2>Postular toma menos de 5 minutos</h2>
+        <p>Completa la postulación online, agenda tu visita y recibe la confirmación en tu correo. Prueba el simulador — es parte de la propuesta.</p>
+      </div>
+      <div class="adm-layout">
+        <div class="reveal">
+          <h3 style="font-size:1.15rem;margin-bottom:4px">Documentos para matrícula</h3>
+          <p style="font-size:.9rem;color:var(--ink-soft)">Se cargan directamente en el portal, o se entregan en la primera visita:</p>
+          <ul class="doc-list">
+            <li><span class="n">1</span> Certificado de nacimiento</li>
+            <li><span class="n">2</span> Fotocopia del carné de vacunas</li>
+            <li><span class="n">3</span> 6 fotos tamaño carné</li>
+            <li><span class="n">4</span> Ficha de salud y contactos de emergencia <em style="color:var(--teal-dark);font-style:normal;font-weight:700">(ahora digital ✨)</em></li>
+          </ul>
+        </div>
+
+        <div class="wizard reveal" id="wizard">
+          <div class="wiz-head"><b>Postulación online</b><span>Simulador · 3 pasos · sin compromiso</span></div>
+          <div class="wiz-steps" aria-hidden="true"><i class="done" id="ws1"></i><i id="ws2"></i><i id="ws3"></i></div>
+          <div class="wiz-body" id="wbody">
+            <!-- steps injected by JS -->
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ NOTICIAS ============ -->
+  <section id="noticias">
+    <div class="wrap">
+      <div class="sec-head reveal">
+        <span class="eyebrow"><span class="steps-mini" aria-hidden="true"><i></i><i></i><i></i></span> Comunidad Pasito a Paso</span>
+        <h2>Noticias que se publican solas, sin depender de nadie</h2>
+        <p>Blog autoadministrable: el equipo del jardín publica desde el celular y las novedades llegan como notificación a cada familia.</p>
+      </div>
+      <div class="news-grid">
+        <article class="news reveal">
+          <div class="cover" aria-hidden="true">⚽</div>
+          <div class="body"><time>Comunidad</time><h3>Visitas que inspiran a nuestros niños</h3><p>Deportistas y figuras públicas han compartido con nuestra comunidad, como la recordada visita de Arturo Vidal.</p></div>
+        </article>
+        <article class="news reveal">
+          <div class="cover" aria-hidden="true">🚓</div>
+          <div class="body"><time>Educación vial</time><h3>Carabineros visita el jardín</h3><p>Actividades de seguridad y convivencia junto a Carabineros de Chile, acercando a los niños a su comunidad.</p></div>
+        </article>
+        <article class="news reveal">
+          <div class="cover" aria-hidden="true">🎵</div>
+          <div class="body"><time>Identidad</time><h3>Nuestro himno, ahora en video</h3><p>El himno del jardín acompaña cada celebración. En la nueva web podrás escucharlo y compartirlo con tu familia.</p></div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ CONTACTO ============ -->
+  <section id="contacto">
+    <div class="wrap">
+      <div class="sec-head reveal">
+        <span class="eyebrow"><span class="steps-mini" aria-hidden="true"><i></i><i></i><i></i></span> Conversemos</span>
+        <h2>Ven a conocernos</h2>
+        <p>Agenda una visita guiada o escríbenos: respondemos el mismo día hábil.</p>
+      </div>
+      <div class="contact-layout">
+        <div class="c-info reveal">
+          <div class="c-item"><div class="ic" style="background:var(--peach)">📍</div><div><b>Dirección</b>Avda. Parque del Este 4199, Ciudad del Este, Puente Alto</div></div>
+          <div class="c-item"><div class="ic" style="background:var(--sky)">📞</div><div><b>Teléfono</b><a href="tel:+56222668426">+56 2 2266 8426</a></div></div>
+          <div class="c-item"><div class="ic" style="background:var(--lilac)">✉️</div><div><b>Correo</b><a href="mailto:info@pasitoapaso.cl">info@pasitoapaso.cl</a></div></div>
+          <div class="c-map" role="img" aria-label="Mapa de referencia de la ubicación del jardín">
+            <div class="pin" aria-hidden="true"></div>
+            <a href="https://www.google.com/maps/search/?api=1&query=Avda.+Parque+del+Este+4199,+Puente+Alto" target="_blank" rel="noopener">Abrir en Google Maps ↗</a>
+          </div>
+        </div>
+        <form class="c-form reveal" id="cform">
+          <h3>Agenda tu visita</h3>
+          <p>Formulario conectado al correo del jardín y al asistente virtual — nunca más un mensaje perdido.</p>
+          <label for="f-nombre">Nombre del apoderado</label>
+          <input id="f-nombre" type="text" placeholder="Ej: María Fernández" required>
+          <label for="f-fono">Teléfono o correo</label>
+          <input id="f-fono" type="text" placeholder="+56 9 …" required>
+          <label for="f-nivel">Nivel de interés</label>
+          <select id="f-nivel">
+            <option>Medio Menor (2 años)</option>
+            <option>Medio Mayor (3 años)</option>
+            <option>Transición I (4 años)</option>
+            <option>Transición II (5 años)</option>
+          </select>
+          <label for="f-msg">Mensaje</label>
+          <textarea id="f-msg" rows="3" placeholder="Cuéntanos qué necesitas…"></textarea>
+          <div style="margin-top:18px"><button class="btn btn-coral" type="submit">Enviar y agendar</button></div>
+          <div class="sent" id="csent">✓ ¡Recibido! Te contactaremos hoy mismo. (Demostración: en la web real, esto llega al correo del jardín y al panel de administración.)</div>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ PITCH ============ -->
+  <section id="pitch">
+    <div class="wrap">
+      <div class="sec-head reveal">
+        <span class="eyebrow"><span class="steps-mini" aria-hidden="true"><i></i><i></i><i></i></span> Para el equipo de Pasito a Paso</span>
+        <h2 style="color:#fff">Qué cambia con esta modernización</h2>
+        <p>Todo lo que viste arriba es una maqueta funcional construida sobre la información real del jardín. Así se compara con el sitio actual:</p>
+      </div>
+      <div class="compare-scroll reveal">
+        <table class="compare">
+          <thead><tr><th scope="col">Área</th><th scope="col">Sitio actual</th><th scope="col">Propuesta</th></tr></thead>
+          <tbody>
+            <tr><td>Contacto</td><td>Formulario con error visible; consultas que se pierden</td><td>Formulario operativo + asistente IA 24/7 + WhatsApp Business API</td></tr>
+            <tr><td>Admisión</td><td>Solo presencial, con papeleo</td><td>Postulación online en 3 pasos con seguimiento y carga de documentos</td></tr>
+            <tr><td>Comunicación</td><td>Plataforma externa (KidsBook) separada de la web</td><td>Portal de apoderados integrado: agenda diaria, circulares y autorizaciones</td></tr>
+            <tr><td>Pagos</td><td>No disponibles en la web</td><td>Webpay / transferencia con recordatorios automáticos</td></tr>
+            <tr><td>Contenido</td><td>Noticias detenidas hace años, foco en protocolos COVID</td><td>Blog autoadministrable desde el celular, con notificaciones a las familias</td></tr>
+            <tr><td>Diseño</td><td>No adaptado a móviles, donde hoy navega la mayoría de los apoderados</td><td>Mobile-first, accesible (WCAG) y con carga rápida</td></tr>
+            <tr><td>Visibilidad</td><td>Difícil de encontrar en Google</td><td>SEO local + Google Business: aparecer cuando buscan "jardín infantil Puente Alto"</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="fases">
+        <div class="fase reveal"><span class="fn">1</span><h3 style="color:#fff">Nueva web + admisión online</h3><p>El sitio que estás viendo, con dominio y correos actuales.</p>
+          <ul><li>Diseño mobile-first y SEO local</li><li>Postulación y agenda de visitas online</li><li>Blog autoadministrable</li></ul></div>
+        <div class="fase reveal"><span class="fn">2</span><h3 style="color:#fff">Portal de apoderados</h3><p>La agenda digital y el canal oficial de comunicación.</p>
+          <ul><li>Agenda diaria con fotos</li><li>Circulares con confirmación de lectura</li><li>Autorizaciones digitales y retiro con QR</li></ul></div>
+        <div class="fase reveal"><span class="fn">3</span><h3 style="color:#fff">Pagos + asistente IA</h3><p>Automatización de la gestión y la atención.</p>
+          <ul><li>Pagos en línea y estado de cuenta</li><li>Asistente IA entrenado con la info del jardín</li><li>Reportes de gestión para dirección</li></ul></div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap foot">
+    <a class="logo" href="#inicio">
+      <span class="steps" aria-hidden="true"><i></i><i></i><i></i></span>
+      <span><b>Pasito a Paso</b><small>Jardín Infantil · Puente Alto</small></span>
+    </a>
+    <p>Avda. Parque del Este 4199, Ciudad del Este, Puente Alto · +56 2 2266 8426 · info@pasitoapaso.cl<br>
+    Maqueta de propuesta de modernización web — los módulos interactivos son simulaciones de demostración.</p>
+  </div>
+</footer>
+
+<!-- ============ CHATBOT ============ -->
+<button class="bot-fab" id="botFab" aria-label="Abrir asistente virtual" aria-expanded="false">🐥<span class="badge">IA</span></button>
+<div class="bot-panel" id="botPanel" role="dialog" aria-label="Asistente virtual Pasito">
+  <div class="bot-head">
+    <span class="av" aria-hidden="true">🐥</span>
+    <div><b>Pasito, asistente virtual</b><span>Responde al instante · 24/7</span></div>
+  </div>
+  <div class="bot-log" id="botLog"></div>
+  <div class="chips" id="botChips">
+    <button data-q="¿Qué niveles tienen?">Niveles y edades</button>
+    <button data-q="¿Cuáles son los horarios?">Horarios</button>
+    <button data-q="¿Qué documentos piden para matricular?">Matrícula</button>
+    <button data-q="¿Dónde están ubicados?">Ubicación</button>
+  </div>
+  <div class="bot-in">
+    <input id="botInput" type="text" placeholder="Escribe tu pregunta…" aria-label="Escribe tu pregunta">
+    <button id="botSend" aria-label="Enviar">➤</button>
+  </div>
+  <div class="bot-note">Demostración con respuestas predefinidas. La versión real usa IA entrenada con la información oficial del jardín.</div>
+</div>
+
+<script>
+(function(){
+  var reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  /* menu */
+  var hamb=document.getElementById('hamb'),menu=document.getElementById('menu');
+  hamb.addEventListener('click',function(){
+    var open=menu.classList.toggle('open');
+    hamb.setAttribute('aria-expanded',open);
+  });
+  menu.addEventListener('click',function(e){
+    if(e.target.tagName==='A'){menu.classList.remove('open');hamb.setAttribute('aria-expanded','false');}
+  });
+
+  /* scroll reveal */
+  var items=document.querySelectorAll('.reveal');
+  if(reduced||!('IntersectionObserver'in window)){
+    items.forEach(function(el){el.classList.add('in');});
+  }else{
+    var io=new IntersectionObserver(function(es){
+      es.forEach(function(en){if(en.isIntersecting){en.target.classList.add('in');io.unobserve(en.target);}});
+    },{threshold:.12});
+    items.forEach(function(el){io.observe(el);});
+  }
+
+  /* hero feed */
+  var feed=document.getElementById('feed');
+  var entries=[
+    '<time>8:31</time>Ingreso registrado en portería <span class="tag tag-ok">Retiro QR activo</span>',
+    '<time>9:40</time>Colación: comió toda su fruta 🍎 <span class="tag tag-ok">Sin observaciones</span>',
+    '__photo__<time>10:30</time>Taller de arte: pintura con témpera 🎨 <span class="tag tag-info">3 fotos nuevas</span>',
+    '<time>12:20</time>Circular: reunión de apoderados el jueves <span class="tag tag-info">Confirmar lectura</span>'
+  ];
+  entries.forEach(function(html,i){
+    var d=document.createElement('div');
+    var photo=html.indexOf('__photo__')===0;
+    d.className='p-card'+(photo?' pc-photo':'');
+    d.innerHTML=(photo?html.replace('__photo__',''):html)+(photo?'<div class="ph" role="img" aria-label="Foto de la actividad de arte"></div>':'');
+    d.style.animationDelay=reduced?'0s':(0.5+i*0.7)+'s';
+    feed.appendChild(d);
+  });
+
+  /* portal tabs */
+  var panes={
+    agenda:'<div class="pane-grid">'+
+      '<div class="mini-card"><span class="st st-ok">Registrado</span><b>Ingreso 8:31 h</b><small>Amanda ingresó con su apoderado. Registro QR en portería.</small></div>'+
+      '<div class="mini-card"><span class="st st-ok">Completo</span><b>Colación de la mañana</b><small>Comió todo · fruta y yogurt. Sin observaciones.</small></div>'+
+      '<div class="mini-card"><span class="st st-new">3 fotos</span><b>Taller de arte 🎨</b><small>Pintura con témpera: mezcla de colores primarios.</small></div>'+
+      '<div class="mini-card"><span class="st st-ok">45 min</span><b>Siesta</b><small>Descansó tranquila entre 13:00 y 13:45.</small></div></div>',
+    circulares:'<div class="pane-grid">'+
+      '<div class="mini-card"><span class="st st-new">Nueva</span><b>Reunión de apoderados</b><small>Jueves 19:00 h · Confirmación de lectura: 28 de 32 familias.</small></div>'+
+      '<div class="mini-card"><span class="st st-ok">Leída</span><b>Salida pedagógica al parque</b><small>Autorización digital firmada el lunes.</small></div>'+
+      '<div class="mini-card"><span class="st st-ok">Leída</span><b>Calendario de talleres</b><small>Música, arte y psicomotricidad · segundo semestre.</small></div>'+
+      '<div class="mini-card"><span class="st st-new">Nueva</span><b>Menú semanal de colaciones</b><small>Publicado por dirección · descargable en PDF.</small></div></div>',
+    pagos:'<div class="pane-grid">'+
+      '<div class="mini-card"><span class="st st-ok">Pagada</span><b>Mensualidad junio</b><small>Webpay · comprobante enviado por correo.</small></div>'+
+      '<div class="mini-card"><span class="st st-pend">Por vencer</span><b>Mensualidad julio</b><small>Vence el 5 de julio · recordatorio automático enviado.</small></div>'+
+      '<div class="mini-card"><span class="st st-ok">Al día</span><b>Estado de cuenta</b><small>Sin deudas pendientes. Historial completo disponible.</small></div>'+
+      '<div class="mini-card"><span class="st st-ok">Activo</span><b>Pago automático</b><small>Cargo mensual autorizado a tarjeta terminada en 4421.</small></div></div>',
+    autorizaciones:'<div class="pane-grid">'+
+      '<div class="mini-card"><span class="st st-ok">Vigente</span><b>Personas autorizadas a retiro</b><small>2 registradas con QR: apoderada y abuela materna.</small></div>'+
+      '<div class="mini-card"><span class="st st-new">Pendiente</span><b>Salida pedagógica · viernes</b><small>Firma digital pendiente · un toque para autorizar.</small></div>'+
+      '<div class="mini-card"><span class="st st-ok">Firmada</span><b>Uso de fotografías</b><small>Autorización anual firmada digitalmente en marzo.</small></div>'+
+      '<div class="mini-card"><span class="st st-ok">Actualizada</span><b>Ficha de salud</b><small>Alergias y contactos de emergencia al día.</small></div></div>'
+  };
+  var tabs=document.querySelectorAll('.portal .tabs button');
+  var paneEl=document.getElementById('pane');
+  tabs.forEach(function(t){
+    t.addEventListener('click',function(){
+      tabs.forEach(function(x){x.setAttribute('aria-selected','false');});
+      t.setAttribute('aria-selected','true');
+      paneEl.innerHTML=panes[t.dataset.pane];
+    });
+  });
+
+  /* wizard */
+  var wbody=document.getElementById('wbody');
+  var ws=[document.getElementById('ws1'),document.getElementById('ws2'),document.getElementById('ws3')];
+  var wdata={};
+  function esc(s){var d=document.createElement('div');d.textContent=s||'';return d.innerHTML;}
+  function step(n){
+    ws.forEach(function(el,i){el.classList.toggle('done',i<=n);});
+    if(n===0){
+      wbody.innerHTML=
+        '<label for="w-nom">Nombre del niño o niña</label><input id="w-nom" type="text" placeholder="Ej: Amanda Rojas" value="'+esc(wdata.nom)+'">'+
+        '<label for="w-apo">Nombre del apoderado</label><input id="w-apo" type="text" placeholder="Ej: Carolina Rojas" value="'+esc(wdata.apo)+'">'+
+        '<div class="wiz-actions"><span></span><button class="btn btn-coral" id="w-next1" type="button">Siguiente →</button></div>';
+      document.getElementById('w-next1').onclick=function(){
+        wdata.nom=document.getElementById('w-nom').value||'Amanda Rojas';
+        wdata.apo=document.getElementById('w-apo').value||'Carolina Rojas';
+        step(1);
+      };
+    }else if(n===1){
+      wbody.innerHTML=
+        '<label for="w-niv">Nivel al que postula (edad al 31 de marzo)</label>'+
+        '<select id="w-niv"><option>Medio Menor · 2 años</option><option>Medio Mayor · 3 años</option><option>Transición I · 4 años</option><option>Transición II · 5 años</option></select>'+
+        '<label for="w-jor">Jornada</label>'+
+        '<select id="w-jor"><option>Mañana · 8:30 a 12:30</option><option>Tarde · 14:00 a 18:00</option></select>'+
+        '<div class="wiz-actions"><button class="btn btn-ghost" id="w-back1" type="button">← Volver</button><button class="btn btn-coral" id="w-next2" type="button">Siguiente →</button></div>';
+      document.getElementById('w-back1').onclick=function(){step(0);};
+      document.getElementById('w-next2').onclick=function(){
+        wdata.niv=document.getElementById('w-niv').value;
+        wdata.jor=document.getElementById('w-jor').value;
+        step(2);
+      };
+    }else{
+      wbody.innerHTML=
+        '<div class="wiz-ok"><div class="check" aria-hidden="true">✓</div>'+
+        '<h3 style="margin-bottom:6px">¡Postulación enviada!</h3>'+
+        '<p style="font-size:.88rem;color:var(--ink-soft)">'+esc(wdata.nom)+' · '+esc(wdata.niv)+'<br>'+esc(wdata.jor)+'</p>'+
+        '<p style="margin:12px 0 4px;font-size:.85rem">N° de seguimiento: <code>P-2027-0148</code></p>'+
+        '<p style="font-size:.82rem;color:var(--ink-soft)">Recibirás la confirmación por correo y podrás seguir el estado en el portal.</p></div>'+
+        '<div class="wiz-actions"><button class="btn btn-ghost" id="w-again" type="button">↺ Probar de nuevo</button><a class="btn btn-coral" href="#contacto">Agendar visita</a></div>'+
+        '<p class="wiz-note">Simulación de demostración — no se envían datos reales.</p>';
+      document.getElementById('w-again').onclick=function(){wdata={};step(0);};
+    }
+  }
+  step(0);
+
+  /* contact form (demo) */
+  document.getElementById('cform').addEventListener('submit',function(e){
+    e.preventDefault();
+    document.getElementById('csent').style.display='block';
+  });
+
+  /* chatbot */
+  var fab=document.getElementById('botFab'),panel=document.getElementById('botPanel'),
+      log=document.getElementById('botLog'),input=document.getElementById('botInput'),
+      send=document.getElementById('botSend'),chips=document.getElementById('botChips');
+  var greeted=false;
+  fab.addEventListener('click',function(){
+    var open=panel.classList.toggle('open');
+    fab.setAttribute('aria-expanded',open);
+    if(open&&!greeted){greeted=true;botSay('¡Hola! 👋 Soy Pasito, el asistente del jardín. Puedo contarte sobre niveles, horarios, matrícula o ubicación. ¿Qué necesitas saber?');}
+    if(open)input.focus();
+  });
+  function scrollLog(){log.scrollTop=log.scrollHeight;}
+  function botSay(t){
+    var m=document.createElement('div');m.className='msg bot';m.innerHTML=t;log.appendChild(m);scrollLog();
+  }
+  function meSay(t){
+    var m=document.createElement('div');m.className='msg me';m.textContent=t;log.appendChild(m);scrollLog();
+  }
+  function answer(q){
+    var s=q.toLowerCase();
+    if(/nivel|edad|años|curso/.test(s))return 'Tenemos 4 niveles según la edad cumplida al 31 de marzo:<br>• <b>Medio Menor</b> — 2 años<br>• <b>Medio Mayor</b> — 3 años<br>• <b>Transición I</b> — 4 años<br>• <b>Transición II</b> — 5 años';
+    if(/horario|jornada|hora/.test(s))return 'Tenemos dos jornadas: <b>mañana de 8:30 a 12:30</b> y <b>tarde de 14:00 a 18:00</b>, para todos los niveles. Además hay talleres complementarios. 🕘';
+    if(/matr[ií]cula|documento|postul|inscri/.test(s))return 'Para matricular necesitas: certificado de nacimiento, fotocopia del carné de vacunas y 6 fotos tamaño carné. Puedes iniciar la <a href="#admision">postulación online aquí</a> en 3 pasos. 📝';
+    if(/ubicaci|direcci[oó]n|d[oó]nde|lleg/.test(s))return 'Estamos en <b>Avda. Parque del Este 4199, Ciudad del Este, Puente Alto</b>. También puedes llamar al +56 2 2266 8426. 📍';
+    if(/precio|arancel|valor|cuánto|cuanto|mensualidad/.test(s))return 'Los aranceles se informan en la entrevista de admisión, porque varían según nivel y jornada. ¿Te gustaría <a href="#contacto">agendar una visita</a> para conocerlos? 💛';
+    if(/visita|conocer|tour/.test(s))return '¡Nos encantaría recibirte! Completa el <a href="#contacto">formulario de visita</a> y te confirmamos el mismo día hábil. 🏫';
+    if(/hola|buenas|buenos/.test(s))return '¡Hola! 😊 ¿Quieres saber sobre niveles, horarios, matrícula o nuestra ubicación?';
+    return 'Buena pregunta 😊. En la versión real, respondo con IA entrenada con toda la información oficial del jardín. Por ahora puedo ayudarte con <b>niveles</b>, <b>horarios</b>, <b>matrícula</b> y <b>ubicación</b> — o puedes <a href="#contacto">dejar tu consulta aquí</a>.';
+  }
+  function handle(q){
+    if(!q.trim())return;
+    meSay(q);
+    setTimeout(function(){botSay(answer(q));},reduced?0:450);
+    input.value='';
+  }
+  send.addEventListener('click',function(){handle(input.value);});
+  input.addEventListener('keydown',function(e){if(e.key==='Enter')handle(input.value);});
+  chips.addEventListener('click',function(e){
+    var b=e.target.closest('button');if(b)handle(b.dataset.q);
+  });
+})();
+</script>
+
+</body>
+</html>
