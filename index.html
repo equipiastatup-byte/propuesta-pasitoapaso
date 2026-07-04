@@ -444,16 +444,14 @@
   .bot-in button{border:none;background:var(--coral);color:#fff;font-weight:800;padding:0 18px;cursor:pointer;font-size:1.05rem}
   .bot-note{font-size:.62rem;color:var(--ink-soft);text-align:center;padding:5px 10px;background:#F8FBFA}
 
-  /* ---------- intro fachada ---------- */
+  /* ---------- intro fachada inmersiva ---------- */
   .noscroll{overflow:hidden}
   .intro{
     position:fixed;inset:0;z-index:200;
-    background:linear-gradient(180deg,#BFE3F0 0%,#FFE3BC 58%,#FFEFD9 100%);
+    background:linear-gradient(180deg,#F3C9CC 0%,#FBDFC0 52%,#FFF0DC 100%);
     display:flex;align-items:center;justify-content:center;overflow:hidden;
-    transform-origin:50% 76%;
-    transition:transform 1s cubic-bezier(.55,0,.85,.4),opacity .85s ease .18s;
   }
-  .intro.go{transform:scale(7);opacity:0;pointer-events:none}
+  .intro.go{opacity:0;pointer-events:none;transition:opacity .85s ease}
   .intro.bye{opacity:0;transition:opacity .22s ease;pointer-events:none}
   .intro-skip{
     position:absolute;top:18px;right:18px;z-index:5;
@@ -461,97 +459,100 @@
     font-family:var(--font-display);font-weight:700;font-size:.8rem;color:var(--ink);
     padding:8px 16px;cursor:pointer;
   }
-  .scene{position:relative;width:min(94vw,860px,120vh);aspect-ratio:16/10}
-  .i-bg{opacity:0;transition:opacity .8s ease}
-  .intro.s3 .i-bg{opacity:1}
-  .i-sun{position:absolute;top:4%;right:7%;width:11%;aspect-ratio:1;border-radius:50%;background:var(--sun);box-shadow:0 0 0 12px rgba(255,200,69,.28),0 0 0 26px rgba(255,200,69,.12)}
-  .i-cloud{position:absolute;background:#fff;border-radius:999px;animation:idrift 9s ease-in-out infinite alternate}
-  .i-cloud::before,.i-cloud::after{content:"";position:absolute;background:#fff;border-radius:50%}
-  .c1{top:9%;left:11%;width:15%;height:5%}
-  .c1::before{width:42%;aspect-ratio:1;top:-56%;left:15%}
-  .c1::after{width:30%;aspect-ratio:1;top:-34%;right:16%}
-  .c2{top:19%;left:56%;width:11%;height:4%;animation-delay:1.4s}
-  .c2::before{width:44%;aspect-ratio:1;top:-50%;left:18%}
-  .c2::after{width:30%;aspect-ratio:1;top:-28%;right:16%}
-  @keyframes idrift{from{transform:translateX(0)}to{transform:translateX(22px)}}
-  .i-mount{position:absolute;bottom:27%;width:48%;aspect-ratio:2.6/1;background:#CBA9BC;clip-path:polygon(50% 0,100% 100%,0 100%);opacity:.5}
-  .m2{right:-9%;bottom:26%;width:58%;background:#B99AAE;opacity:.4}
-  .m1{left:-7%}
-  .i-ground{position:absolute;left:-40vw;right:-40vw;bottom:0;height:13%;background:#EADFCB}
-  .i-house{
-    position:absolute;left:50%;bottom:12%;width:58%;height:52%;
-    background:#2E4EA3;border:3px solid var(--ink);border-radius:10px 10px 0 0;
-    opacity:0;transform:translateX(-50%) scale(.55);transform-origin:bottom center;
-    transition:transform .65s cubic-bezier(.34,1.56,.64,1),opacity .4s;
-  }
-  .intro.s1 .i-house{opacity:1;transform:translateX(-50%) scale(1)}
-  .i-roof{position:absolute;top:-13%;left:-4%;width:108%;height:15%;background:var(--coral-dark);border:3px solid var(--ink);border-radius:10px}
-  .i-win{position:absolute;background:#FFF6E0;border:3px solid var(--sun);border-radius:8px;box-shadow:inset 0 0 0 2px rgba(51,48,94,.22)}
-  .w1{top:11%;left:9%;width:16%;height:21%}
-  .w2{top:11%;right:9%;width:16%;height:21%}
-  .w3{top:9%;left:42%;width:16%;height:24%;border-color:#8ED4CC}
-  .i-sign{
-    position:absolute;left:50%;top:44%;width:64%;height:25%;
-    background:#fff;border:3px solid var(--ink);border-radius:14px;
-    box-shadow:5px 5px 0 rgba(51,48,94,.25);
-    display:flex;align-items:center;justify-content:center;
-    opacity:0;transform:translateX(-50%) rotate(-1.5deg) translateY(-26px);
-    transition:transform .55s cubic-bezier(.34,1.56,.64,1),opacity .35s;
-  }
-  .intro.s3 .i-sign{opacity:1;transform:translateX(-50%) rotate(-1.5deg) translateY(0)}
-  .i-sign-logo{display:block;width:84%;height:82%;background:var(--logo-uri) center/contain no-repeat}
-  .i-banner{
-    position:absolute;right:-7%;bottom:5%;background:var(--teal);color:#fff;
-    border:3px solid var(--ink);border-radius:10px;padding:2.2% 3%;
-    font-family:var(--font-display);font-weight:700;font-size:clamp(.62rem,1.7vw,.95rem);
-    letter-spacing:.06em;box-shadow:4px 4px 0 rgba(51,48,94,.25);
-    opacity:0;transform:rotate(2deg) translateY(14px);
-    transition:transform .5s cubic-bezier(.34,1.56,.64,1) .15s,opacity .35s .15s;
-  }
-  .intro.s3 .i-banner{opacity:1;transform:rotate(2deg) translateY(0)}
-  .i-palm{
-    position:absolute;left:5%;bottom:12%;width:11%;height:58%;
-    opacity:0;transform:translateY(30px);
-    transition:transform .6s cubic-bezier(.34,1.56,.64,1) .12s,opacity .4s .12s;
-  }
-  .intro.s2 .i-palm{opacity:1;transform:none}
-  .i-trunk{position:absolute;bottom:0;left:43%;width:15%;height:70%;background:#9A6B4F;border:2.5px solid var(--ink);border-radius:8px}
-  .i-crown{position:absolute;top:-4%;left:0;width:100%;height:46%;transform-origin:50% 85%;animation:isway 4.5s ease-in-out infinite alternate}
-  @keyframes isway{from{transform:rotate(-3deg)}to{transform:rotate(3.5deg)}}
-  .i-crown i{position:absolute;left:50%;top:55%;width:58%;height:28%;background:#2E9B63;border:2.5px solid var(--ink);border-radius:999px;transform-origin:left center}
-  .i-crown i:nth-child(1){transform:rotate(-15deg)}
-  .i-crown i:nth-child(2){transform:rotate(-55deg)}
-  .i-crown i:nth-child(3){transform:rotate(-95deg)}
-  .i-crown i:nth-child(4){transform:rotate(-135deg)}
-  .i-crown i:nth-child(5){transform:rotate(-175deg)}
-  .i-fence{
-    position:absolute;left:-8%;right:-8%;bottom:0;height:23%;
-    display:flex;align-items:stretch;
-    opacity:0;transform:translateY(46px);
-    transition:transform .6s cubic-bezier(.34,1.56,.64,1),opacity .4s;
-  }
-  .intro.s2 .i-fence{opacity:1;transform:none}
-  .i-fence-side{flex:1;position:relative;background:repeating-linear-gradient(90deg,#E8442B 0 12px,rgba(232,68,43,0) 12px 21px)}
-  .i-fence-side::before,.i-gate::before{content:"";position:absolute;top:10%;left:0;right:0;height:13%;background:#E8442B;border-radius:6px}
-  .i-fence-side::after,.i-gate::after{content:"";position:absolute;top:62%;left:0;right:0;height:13%;background:#E8442B;border-radius:6px}
-  .i-gatewrap{width:20%;position:relative;perspective:700px}
-  .i-gate{position:absolute;top:0;bottom:0;width:50%;background:repeating-linear-gradient(90deg,#E8442B 0 12px,rgba(232,68,43,0) 12px 21px);transition:transform .9s cubic-bezier(.6,0,.4,1)}
-  .gl{left:0;transform-origin:left center}
-  .gr{right:0;transform-origin:right center}
-  .intro.s4 .gl{transform:rotateY(-105deg)}
-  .intro.s4 .gr{transform:rotateY(105deg)}
-  .i-fone{
-    position:absolute;left:5%;top:-22%;background:#fff;border:2px solid var(--ink);border-radius:999px;
-    padding:3px 12px;font-size:clamp(.55rem,1.4vw,.8rem);font-weight:700;white-space:nowrap;
-  }
-  .i-welcome{
-    position:absolute;left:50%;bottom:-9%;transform:translateX(-50%);
+  .scene{position:relative;width:min(96vw,880px,124vh);aspect-ratio:16/10;opacity:0;transition:opacity .9s ease}
+  .intro.st0 .scene{opacity:1}
+  .world{position:absolute;inset:0;transform-origin:56% 67%;transition:transform 2.1s cubic-bezier(.5,.05,.3,1)}
+  .intro.st1 .world{transform:scale(2)}
+  .intro.st2 .world{transform:scale(2.35)}
+  .intro.st3 .world{transform:scale(5.4)}
+  .intro.st4 .world{transform:scale(13)}
+  /* cordillera al atardecer */
+  .f-cord{position:absolute;bottom:39%;clip-path:polygon(50% 0,100% 100%,0 100%)}
+  .fc1{left:-6%;width:56%;aspect-ratio:3/1;background:#DBA9A2;opacity:.75}
+  .fc2{right:-8%;width:68%;aspect-ratio:3.4/1;background:#CD9BA9;opacity:.6}
+  .f-walk{position:absolute;left:-40vw;right:-40vw;bottom:0;height:12%;background:#E7DFD2}
+  /* casa: cuerpo principal + frontón triangular con ribete rojo */
+  .f-body{position:absolute;left:28%;width:56%;bottom:26%;height:24%;background:#2E4EA3;border:2.5px solid var(--ink)}
+  .f-g0{position:absolute;left:30.5%;width:51%;bottom:49.6%;height:26.5%;background:var(--ink);clip-path:polygon(50% 0,100% 100%,0 100%)}
+  .f-g1{position:absolute;left:32%;width:48%;bottom:49.6%;height:24.5%;background:#57463F;clip-path:polygon(50% 0,100% 100%,0 100%)}
+  .f-g2{position:absolute;left:33.5%;width:45%;bottom:49.6%;height:22%;background:#E8442B;clip-path:polygon(50% 0,100% 100%,0 100%)}
+  .f-g3{position:absolute;left:35%;width:42%;bottom:49.6%;height:19.5%;background:#2E4EA3;clip-path:polygon(50% 0,100% 100%,0 100%)}
+  .f-gsign{position:absolute;left:47%;width:18%;bottom:52%;height:7%;background:#fff;border:2px solid var(--ink);border-radius:999px;background-image:var(--logo-uri);background-size:82% auto;background-position:center;background-repeat:no-repeat;background-color:#fff}
+  /* ventanas con murales de colores */
+  .f-win{position:absolute;background:
+    radial-gradient(circle at 28% 42%,#FF6247 0 13%,transparent 14%),
+    radial-gradient(circle at 68% 30%,#1FA79B 0 12%,transparent 13%),
+    radial-gradient(circle at 52% 72%,#FFC845 0 13%,transparent 14%),
+    #FFF6EC;border:2.5px solid var(--ink);border-radius:6px}
+  .fw1{left:36%;width:9%;bottom:30%;height:9%}
+  .fw2{left:66%;width:9%;bottom:30%;height:9%}
+  /* puerta central con luz cálida detrás */
+  .f-doorwrap{position:absolute;left:52.5%;width:7%;bottom:26.2%;height:13.5%;perspective:420px}
+  .f-doorlight{position:absolute;inset:0;background:radial-gradient(circle at 50% 45%,#FFF3CF 0 35%,#FFD873 85%);border:2.5px solid var(--ink)}
+  .f-door{position:absolute;inset:0;background:#1D3C8F;border:2.5px solid #E8442B;border-radius:2px;transform-origin:left center;transition:transform 1.1s cubic-bezier(.6,0,.4,1)}
+  .f-door::after{content:"";position:absolute;right:12%;top:46%;width:14%;aspect-ratio:1;border-radius:50%;background:var(--sun)}
+  .intro.door .f-door{transform:rotateY(-108deg)}
+  .f-steps{position:absolute;left:51%;width:10%;bottom:24.4%;height:1.8%;background:#C9BCA8;border:2px solid var(--ink);border-radius:3px}
+  /* torre izquierda con balcón de baranda roja */
+  .f-tower{position:absolute;left:14%;width:17%;bottom:26%;height:38%;background:#2E4EA3;border:2.5px solid var(--ink)}
+  .f-troof{position:absolute;left:12.5%;width:20%;bottom:63.6%;height:4.6%;background:#57463F;border:2.5px solid var(--ink);border-radius:4px}
+  .f-tfascia{position:absolute;left:13%;width:19%;bottom:62.4%;height:1.5%;background:#E8442B}
+  .f-balcdoor{left:19%;width:7%;bottom:48.5%;height:9%}
+  .f-balc{position:absolute;left:15%;width:15%;bottom:47%;height:7.5%;border-bottom:3px solid var(--ink);
+    background:repeating-linear-gradient(90deg,#E8442B 0 5px,transparent 5px 12px);border-top:3px solid #E8442B}
+  .fw3{left:17.5%;width:9%;bottom:31%;height:8.5%}
+  /* palmera */
+  .f-palm{position:absolute;left:4%;width:10%;bottom:12%;height:56%}
+  .f-trunk{position:absolute;bottom:0;left:43%;width:15%;height:70%;background:#9A6B4F;border:2.5px solid var(--ink);border-radius:8px}
+  .f-crown{position:absolute;top:-4%;left:0;width:100%;height:46%;transform-origin:50% 85%;animation:isway 5s ease-in-out infinite alternate}
+  @keyframes isway{from{transform:rotate(-2.5deg)}to{transform:rotate(3deg)}}
+  .f-crown i{position:absolute;left:50%;top:55%;width:58%;height:28%;background:#2E9B63;border:2.5px solid var(--ink);border-radius:999px;transform-origin:left center}
+  .f-crown i:nth-child(1){transform:rotate(-15deg)}
+  .f-crown i:nth-child(2){transform:rotate(-55deg)}
+  .f-crown i:nth-child(3){transform:rotate(-95deg)}
+  .f-crown i:nth-child(4){transform:rotate(-135deg)}
+  .f-crown i:nth-child(5){transform:rotate(-175deg)}
+  /* patio con juegos */
+  .f-grass{position:absolute;left:12%;right:12%;bottom:24.2%;height:2.4%;background:#3FA968;border:2px solid var(--ink);border-radius:5px}
+  .f-slide{position:absolute;left:34%;width:9%;bottom:26.4%;height:7%;background:var(--teal);clip-path:polygon(0 100%,50% 0,100% 100%);border-radius:4px}
+  .f-slide::after{content:"";position:absolute;right:-26%;bottom:0;width:60%;height:16%;background:var(--sun);border-radius:4px;transform:rotate(-32deg);transform-origin:left bottom}
+  .f-toy{position:absolute;border:2px solid var(--ink)}
+  .t1{left:67%;width:4.5%;bottom:26.6%;height:4.5%;background:var(--coral);border-radius:5px}
+  .t2{left:73.5%;width:3.6%;bottom:26.4%;aspect-ratio:1;background:var(--teal);border-radius:50%}
+  /* reja roja con letrero blanco (www · fono · logo · MATRÍCULAS) */
+  .f-fence{position:absolute;left:1%;right:1%;bottom:12%;height:27%;transition:opacity .9s ease,transform .9s ease}
+  .intro.st2 .f-fence{opacity:0;transform:translateY(34%) scale(1.6)}
+  .f-base{position:absolute;left:0;right:0;bottom:0;height:22%;background:#24449A;border:2.5px solid var(--ink);border-radius:4px}
+  .f-bars{position:absolute;top:33%;bottom:20%;background:repeating-linear-gradient(90deg,#E8442B 0 6px,rgba(232,68,43,0) 6px 14px)}
+  .f-bars::before{content:"";position:absolute;top:-9%;left:0;right:0;height:10%;background:#E8442B;border-radius:4px}
+  .bl{left:0;width:46%}
+  .br{left:64%;right:0}
+  .f-gatewrap{position:absolute;left:46%;width:18%;top:26%;bottom:20%;perspective:600px}
+  .f-gate{position:absolute;top:0;bottom:0;width:50%;background:repeating-linear-gradient(90deg,#E8442B 0 6px,rgba(232,68,43,0) 6px 14px);border-top:4px solid #E8442B;transition:transform 1s cubic-bezier(.6,0,.4,1)}
+  .fgl{left:0;transform-origin:left center}
+  .fgr{right:0;transform-origin:right center}
+  .intro.gate .fgl{transform:rotateY(-110deg)}
+  .intro.gate .fgr{transform:rotateY(110deg)}
+  .f-banner{position:absolute;left:0;right:0;top:0;height:34%;z-index:2;background:#fff;border:2.5px solid var(--ink);border-radius:8px;display:flex;align-items:center;gap:1%;padding:0 1.5%;box-shadow:0 3px 0 rgba(51,48,94,.15)}
+  .fb-info{flex:1.25;font-size:clamp(.5rem,1.3vw,.78rem);font-weight:700;color:#1D5FBF;text-align:center;white-space:nowrap;overflow:hidden}
+  .fb-logo{flex:.9;align-self:stretch;background:var(--logo-uri) center/contain no-repeat}
+  .fb-mat{flex:1;font-family:var(--font-display);font-weight:700;color:#1D5FBF;font-size:clamp(.6rem,1.6vw,.95rem);letter-spacing:.05em;text-align:center;white-space:nowrap}
+  /* mensajes del recorrido + progreso */
+  .f-msg{
+    position:absolute;left:50%;bottom:8%;transform:translateX(-50%);z-index:4;
+    max-width:min(92vw,620px);text-align:center;
+    background:#fff;border:2px solid var(--ink);border-radius:18px;padding:11px 22px;
     font-family:var(--font-display);font-weight:700;color:var(--ink);
-    font-size:clamp(1rem,2.6vw,1.4rem);white-space:nowrap;
-    opacity:0;transition:opacity .5s ease .2s;
+    font-size:clamp(.82rem,2vw,1.05rem);line-height:1.35;
+    box-shadow:4px 4px 0 rgba(51,48,94,.18);
+    opacity:0;transform:translateX(-50%) translateY(8px);
+    transition:opacity .4s ease,transform .4s ease;margin:0;
   }
-  .intro.s4 .i-welcome{opacity:1}
-  @media (max-width:560px){.i-fone{display:none}.i-welcome{font-size:.95rem}}
+  .f-msg.on{opacity:1;transform:translateX(-50%) translateY(0)}
+  .f-dots{position:absolute;left:50%;bottom:3.2%;transform:translateX(-50%);z-index:4;display:flex;gap:9px}
+  .f-dots i{width:9px;height:9px;border-radius:50%;background:#fff;border:2px solid var(--ink);transition:background .3s}
+  .f-dots i.act{background:var(--coral)}
+  @media (max-width:560px){.fb-info{display:none}.fb-logo{flex:1.4}}
 
   /* ---------- recorrido guiado ---------- */
   .tour-link{
@@ -645,27 +646,34 @@
 <div class="intro" id="intro" role="dialog" aria-modal="true" aria-label="Animación de bienvenida al jardín">
   <button class="intro-skip" id="introSkip" type="button">Saltar intro →</button>
   <div class="scene" aria-hidden="true">
-    <div class="i-bg">
-      <div class="i-mount m1"></div><div class="i-mount m2"></div>
-      <div class="i-sun"></div>
-      <div class="i-cloud c1"></div><div class="i-cloud c2"></div>
+    <div class="world">
+      <div class="f-cord fc1"></div><div class="f-cord fc2"></div>
+      <div class="f-walk"></div>
+      <div class="f-body"></div>
+      <div class="f-g0"></div><div class="f-g1"></div><div class="f-g2"></div><div class="f-g3"></div>
+      <div class="f-gsign"></div>
+      <div class="f-win fw1"></div><div class="f-win fw2"></div>
+      <div class="f-doorwrap"><div class="f-doorlight"></div><div class="f-door"></div></div>
+      <div class="f-steps"></div>
+      <div class="f-tower"></div>
+      <div class="f-troof"></div><div class="f-tfascia"></div>
+      <div class="f-win f-balcdoor"></div>
+      <div class="f-balc"></div>
+      <div class="f-win fw3"></div>
+      <div class="f-palm"><div class="f-trunk"></div><div class="f-crown"><i></i><i></i><i></i><i></i><i></i></div></div>
+      <div class="f-grass"></div>
+      <div class="f-slide"></div><div class="f-toy t1"></div><div class="f-toy t2"></div>
+      <div class="f-fence">
+        <div class="f-bars bl"></div>
+        <div class="f-gatewrap"><div class="f-gate fgl"></div><div class="f-gate fgr"></div></div>
+        <div class="f-bars br"></div>
+        <div class="f-base"></div>
+        <div class="f-banner"><span class="fb-info">www.pasitoapaso.cl · ☎ 22 266 8426</span><span class="fb-logo"></span><span class="fb-mat">MATRÍCULAS</span></div>
+      </div>
     </div>
-    <div class="i-ground"></div>
-    <div class="i-house">
-      <div class="i-roof"></div>
-      <div class="i-win w1"></div><div class="i-win w2"></div><div class="i-win w3"></div>
-      <div class="i-sign"><span class="i-sign-logo"></span></div>
-      <div class="i-banner">MATRÍCULAS 2027</div>
-    </div>
-    <div class="i-palm"><div class="i-trunk"></div><div class="i-crown"><i></i><i></i><i></i><i></i><i></i></div></div>
-    <div class="i-fence">
-      <div class="i-fone">☎ 22 266 8426</div>
-      <div class="i-fence-side"></div>
-      <div class="i-gatewrap"><div class="i-gate gl"></div><div class="i-gate gr"></div></div>
-      <div class="i-fence-side"></div>
-    </div>
-    <div class="i-welcome">Bienvenidos — entremos pasito a paso…</div>
   </div>
+  <p class="f-msg" id="introMsg" aria-live="polite"></p>
+  <div class="f-dots" id="introDots" aria-hidden="true"><i></i><i></i><i></i><i></i></div>
 </div>
 <div class="demo-pill" role="note" aria-label="Esta página es una maqueta de demostración">
   <span class="dot"></span> Demo · Propuesta de modernización
@@ -1039,7 +1047,28 @@
       if(el){if(on)el.setAttribute('inert','');else el.removeAttribute('inert');}
     });
   }
-  function introReset(){intro.classList.remove('s1','s2','s3','s4','go','bye');}
+  var introMsg=document.getElementById('introMsg');
+  var introDots=document.querySelectorAll('#introDots i');
+  var introMsgs=[
+    'Bienvenidos a Pasito a Paso — Jardín Infantil en Ciudad del Este, Puente Alto',
+    'Pasa adelante: un recinto seguro y certificado, hecho para niños de 2 a 5 años',
+    '4 niveles — de Medio Menor a Transición II — con jornadas de mañana y tarde y talleres todo el año',
+    'Salas climatizadas y equipadas con tecnología, y agenda digital diaria con tu familia',
+    'Conoce la nueva web del jardín…'
+  ];
+  function introSay(i){
+    introMsg.classList.remove('on');
+    introTimers.push(setTimeout(function(){
+      introMsg.textContent=introMsgs[i];
+      introMsg.classList.add('on');
+    },240));
+    introDots.forEach(function(d,j){d.classList.toggle('act',j<=Math.min(i,3));});
+  }
+  function introReset(){
+    intro.classList.remove('st0','st1','st2','st3','st4','gate','door','go','bye');
+    introMsg.classList.remove('on');introMsg.textContent='';
+    introDots.forEach(function(d){d.classList.remove('act');});
+  }
   function introClearTimers(){
     introTimers.forEach(clearTimeout);introTimers=[];
     if(introHideTimer){clearTimeout(introHideTimer);introHideTimer=null;}
@@ -1070,11 +1099,14 @@
     pageInert(true);
     document.getElementById('introSkip').focus({preventScroll:true});
     introTimers=[
-      setTimeout(function(){intro.classList.add('s1');},250),
-      setTimeout(function(){intro.classList.add('s2');},800),
-      setTimeout(function(){intro.classList.add('s3');},1350),
-      setTimeout(function(){intro.classList.add('s4');},2050),
-      setTimeout(function(){introEnd(false);},3400)
+      setTimeout(function(){intro.classList.add('st0');introSay(0);},150),
+      setTimeout(function(){intro.classList.add('gate');introSay(1);},2500),
+      setTimeout(function(){intro.classList.add('st1');},3200),
+      setTimeout(function(){intro.classList.add('st2');introSay(2);},4900),
+      setTimeout(function(){intro.classList.add('door');introSay(3);},7500),
+      setTimeout(function(){intro.classList.add('st3');},8300),
+      setTimeout(function(){intro.classList.add('st4');introSay(4);},10300),
+      setTimeout(function(){introEnd(false);},11200)
     ];
   }
   document.getElementById('introSkip').addEventListener('click',function(){introEnd(true);});
